@@ -1,0 +1,57 @@
+#include <iostream>
+#include <stdlib.h>
+#include <sstream>
+#include <string>
+using namespace std;
+
+int heighestPower(float coff[])
+{
+    float *ptr = coff;
+    int h_pow = 0;
+    while (*ptr != 0){
+        h_pow++;
+        ptr++;
+    }
+    return h_pow;
+}
+
+void display(int heighestPow, float coff[])
+{
+    cout << "f(x)= ";
+    for (int i=0; i<heighestPow; i++) {
+        cout << coff[i];
+        for (int j=0; j<i; j++)
+            cout << "*x";
+        if(i == heighestPow-1)
+            cout << endl;
+        else
+            cout << " + ";
+    }
+}
+
+int main()
+{
+    string line, word;  //declaration
+    const char *s_word;
+    float coff[100];
+    for (int j=0; j<100; j++)
+        coff[j] = 0;
+    int num,h_pow;
+
+    cout << "Please enter function x" << endl;
+    getline(cin, line);
+    stringstream record(line);
+    record >> word; //load first num
+    s_word = word.c_str();
+    num = atoi(s_word);
+
+    int i=0;
+    while (record >> word) {
+        coff[i] = stof(word);
+        i++;
+    }
+    h_pow = heighestPower(coff);
+    display(h_pow, coff);
+
+    return 0;
+}
